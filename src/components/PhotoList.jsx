@@ -2,16 +2,16 @@ import React from "react";
 import Photo from "./Photo";
 import NoResults from "./NoResults";
 
-const PhotoList = () => {
+const PhotoList = ({data}) => {
+    const results = data.map(photo => <Photo id={photo.id} secret={photo.secret} server={photo.server} title={photo.title} key={photo.id}/>);
+
     return (
         <div className="photo-container">
             <h2>Results</h2>
             <ul>
-                <Photo></Photo>
-                <NoResults></NoResults>
+                {results.length === 0 ? <NoResults /> : results}
             </ul>
         </div>
-        
     )
 };
 
