@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import apiKey from './config';
 import Search from './components/Search';
@@ -8,22 +8,29 @@ import PageNotFound from './components/PageNotFound';
 
 function App() {
   const key = apiKey;
-  // photos state represents a collection of objects that will change and be updated by components
-  const catPhotos = [];
-  const dogPhotos = [];
-  const pigPhotos = [];
-  const photos = [];
+
+  const [photos, setPhotos] = useState([]);
+  const [query, setQuery] = useState([]);
+
+  function fetchData(query) {
+      let activeFetch = true;
+      fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${query}&content_types=0&per_page=24&format=json&nojsoncallback=1`)
+      .then(res => res.json())
+      .then(data => setPhotos(data.photos.photo))
+      .catch(e => console.log('Error fetching and parsing data.', e));
+      return () => activeFetch = false;
+  };
 
   return (
     <>
-      <Search ></Search>
+      <Search changeQuery={setQuery}></Search>
       <Nav></Nav>
       <Routes>
           <Route path="/" element={<Navigate replace={true} to="/cats"/>}/> 
-          <Route path="/cats" element={<PhotoList data={catPhotos}/>}/>
-          <Route path="/dogs" element={<PhotoList data={dogPhotos}/>}/>
-          <Route path="/pigs" element={<PhotoList data={pigPhotos}/>}/>
-          <Route path="/search/:query" element={<PhotoList data={photos}/>} />
+          <Route path="/cats" element={<PhotoList fetchData={fetchData} query={'cats'} data={photos} />}/>
+          <Route path="/dogs" element={<PhotoList fetchData={fetchData} query={'dogs'} data={photos} />}/>
+          <Route path="/pigs" element={<PhotoList fetchData={fetchData} query={'pigs'} data={photos} />}/>
+          <Route path="/search/:query" element={<PhotoList query={query} fetchData={fetchData} data={photos}/> }/>
           <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
@@ -31,5 +38,3 @@ function App() {
 }
 
 export default App;
-
-//should I have a home component? or load cats when the page loads?

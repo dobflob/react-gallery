@@ -93,6 +93,10 @@ input {
   width: 100%;
 }
 
+.page-not-found {
+  list-style-type: none;
+}
+
 @media only screen and (max-width: 767px)  {
   body {
     padding-top: 2em;

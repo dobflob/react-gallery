@@ -1,21 +1,21 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import Photo from "./Photo";
+import React, { useEffect, useState } from "react";
 import NoResults from "./NoResults";
+import Photo from "./Photo";
 
-const PhotoList = ({data}) => {
+const PhotoList = ({query, fetchData, data}) => {
 
-
-    /* const results = data.map(photo => <Photo id={photo.id} secret={photo.secret} server={photo.server} title={photo.title} key={photo.id}/>);
+    useEffect(() => fetchData(query), [query]);
+    
+    let photos = data.map(photo => <Photo id={photo.id} secret={photo.secret} server={photo.server} title={photo.title} key={photo.id} />);
 
     return (
         <div className="photo-container">
             <h2>Results</h2>
             <ul>
-                {results.length === 0 ? <NoResults /> : results}
+                {photos.length === 0 ? <NoResults /> : photos}
             </ul>
         </div>
-    ) */
+    )
 };
 
 export default PhotoList;
