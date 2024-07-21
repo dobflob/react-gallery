@@ -1,16 +1,13 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Search = ({changeQuery}) => {
+const Search = () => {
     const userQuery = useRef();
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      let userInput = userQuery.current.value;
-      let queryString = userInput.replaceAll(' ', '+');
-      let path = `search/${queryString}`;
-      changeQuery(queryString);
+      let path = `search/${userQuery.current.value}`;
       navigate(path);
       e.currentTarget.reset();
     };
