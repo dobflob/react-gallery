@@ -17,7 +17,7 @@ function App() {
       return photos;
     } catch (err) {
       console.log('Error fetching and parsing data.', err);
-    } 
+    }
   };
 
   return (
@@ -25,11 +25,11 @@ function App() {
       <Search></Search>
       <Nav></Nav>
       <Routes>
-          <Route path="/" element={<Navigate replace={true} to="/cats"/>}/> 
-          <Route path={"/cats"} element={<PhotoList fetchData={fetchData} topic='cats'/>}/>
-          <Route path={"/dogs"} element={<PhotoList fetchData={fetchData} topic='dogs'/>}/>
-          <Route path={"pigs"} element={<PhotoList fetchData={fetchData} topic='pigs'/>}/>
-          <Route path="/search/:query" element={<PhotoList fetchData={fetchData} topic={null}/> }/>
+          <Route path="/" element={<Navigate replace={true} to="/cats"/>}/>
+          <Route path={"/cats"} element={<PhotoList fetchData={fetchData} topic='cats' />}/>
+          <Route path={"/dogs"} element={<PhotoList fetchData={fetchData} topic='dogs' />}/>
+          <Route path={"pigs"} element={<PhotoList fetchData={fetchData} topic='pigs' />}/>
+          <Route path="/search/:query" element={<PhotoList fetchData={fetchData} topic={null} /> }/>
           <Route path="*" element={<PageNotFound />}/>
       </Routes>
     </>
