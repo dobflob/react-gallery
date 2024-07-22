@@ -1,10 +1,19 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Search component to display the input and handle the form submission
+ * Navigates the user to a route matching their search text
+ * @returns search form html
+ */
 const Search = () => {
     const userQuery = useRef();
     let navigate = useNavigate();
 
+    /**
+     * When user submits search query, sets the route to match their query and navigates to that route
+     * @param {*} e the event object
+     */
     const handleSubmit = (e) => {
       e.preventDefault();
       let path = `search/${userQuery.current.value}`;

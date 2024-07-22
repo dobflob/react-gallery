@@ -9,6 +9,12 @@ import PageNotFound from './components/PageNotFound';
 function App() {
   const key = apiKey;
 
+  /**
+   * Reusable function to handle fetch requests to flickr api based on the selected default topic or search query (called from photolist component)
+   * Uses the router to navigate to the component matching the topic/search query
+   * @param {string} query the default topic or search query text to send in the flickr api request
+   * @returns children components: search, nav, and photolist
+   */
   async function fetchData(query) {
     try {
       const res = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${query}&content_types=0&per_page=24&format=json&nojsoncallback=1`)
