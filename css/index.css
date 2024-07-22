@@ -93,6 +93,10 @@ input {
   width: 100%;
 }
 
+.loading {
+  margin: 50px auto 0;
+}
+
 @media only screen and (max-width: 767px)  {
   body {
     padding-top: 2em;
@@ -117,7 +121,7 @@ input {
     display: flex;
     justify-content: center;
   }
-  
+
   .main-nav li {
     margin: 10px;
     width: 100px;

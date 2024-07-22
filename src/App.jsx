@@ -27,7 +27,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="container">
       <Search></Search>
       <Nav></Nav>
       <Routes>
@@ -38,7 +38,7 @@ function App() {
           <Route path="/search/:query" element={<PhotoList fetchData={fetchData} topic={null} /> }/>
           <Route path="*" element={<PageNotFound />}/>
       </Routes>
-    </>
+    </div>
   )
 }
 
